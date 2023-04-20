@@ -1,7 +1,6 @@
 # Implementation-of-Simple-Linear-Regression-Model-for-Predicting-the-Marks-Scored
 
 ## AIM:
-
 To write a program to predict the marks scored by a student using the simple linear regression model.
 
 ## Equipments Required:
@@ -9,114 +8,101 @@ To write a program to predict the marks scored by a student using the simple lin
 2. Anaconda – Python 3.7 Installation / Jupyter notebook
 
 ## Algorithm
+1. Use the standard libraries in python for Gradient Design. 
 
-1. Import the standard Libraries.
-2. Set variables for assigning dataset values.
+2. Set variables for assigning dataset values. 
+
 3. Import linear regression from sklearn.
-4. Assign the points for representing in the graph
-5. Predict the regression for marks by using the representation of the graph.
-6. Compare the graphs and hence we obtained the linear regression for the given datas.
 
+4. Assign the points for representing the graph.
 
+5.Predict the regression for marks by using the representation of the graph.
+
+6.Compare the graphs and hence we obtained the linear regression for the given data.
 
 ## Program:
-
+```
+/*
 Program to implement the simple linear regression model for predicting the marks scored.
-Developed by:KARTHICK APPIREDDY
-RegisterNumber:  212220040070
-
-
+Developed by: Karthick Appireddy
+RegisterNumber: 212220040070
+*/
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.metrics import mean_absolute_error,mean_squared_error
-df=pd.read_csv('student_scores.csv')
-#displaying the content in datafile
+df=pd.read_csv('/content/student_scores.csv')
 df.head()
 df.tail()
-x=df.iloc[:,:-1].values
-x
-y=df.iloc[:,1].values
-y
-#splitting train and test data set
+X=df.iloc[:,:-1].values
+X
+Y=df.iloc[:,1].values
+Y
 from sklearn.model_selection import train_test_split
-x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=1/3,random_state=0)
+X_train,X_test,Y_train,Y_test=train_test_split(X,Y,test_size=1/3,random_state=0)
 from sklearn.linear_model import LinearRegression
 regressor=LinearRegression()
-regressor.fit(x_train,y_train)
-y_pred=regressor.predict(x_test)
-#displaying the predicted values
-y_pred
-y_test
-#graph plot for traing data
-plt.scatter(x_train,y_train,color='green')
-plt.plot(x_train,regressor.predict(x_train),color='orange')
-plt.title("Hours vs Scores(training set)")
+regressor.fit(X_train,Y_train)
+Y_pred=regressor.predict(X_test)
+Y_pred
+Y_test
+plt.scatter(X_train,Y_train,color="orange")
+plt.plot(X_train,regressor.predict(X_train),color="red")
+plt.title("Hours vs Scores (Training Set)")
 plt.xlabel("Hours")
 plt.ylabel("Scores")
 plt.show()
-mse=mean_squared_error(y_test,y_pred)
+plt.scatter(X_test,Y_test,color="purple")
+plt.plot(X_test,regressor.predict(X_test),color="yellow")
+plt.title("Hours vs Scores (Test Set)")
+plt.xlabel("Hours")
+plt.ylabel("Scores")
+plt.show()
+mse=mean_squared_error(Y_test,Y_pred)
 print('MSE = ',mse)
-mae=mean_absolute_error(y_test,y_pred)
+mae=mean_absolute_error(Y_test,Y_pred)
 print('MAE = ',mae)
 rmse=np.sqrt(mse)
 print('RMSE = ',rmse)
-
-
+print('Values of MSE')
+```
 
 ## Output:
-1. df.head()
+1.df.head()
 
+![df head()](https://user-images.githubusercontent.com/128135126/229293862-34870b9a-d46d-41cb-9ea0-13cea22f00ae.png)
 
-![image](https://user-images.githubusercontent.com/94175324/229284622-06351aad-a34c-4d95-b4aa-4f1db414c55e.png)
+2.df.tail()
 
+![df tail()](https://user-images.githubusercontent.com/128135126/229293967-09c262a2-1793-4fa3-9ad4-5b969c669900.png)
 
-2. df.tail()
+3.Array value of X
 
+![Array value of X](https://user-images.githubusercontent.com/128135126/229293469-8f08eb90-7774-46aa-b0db-0ac8df78dad3.png)
 
-![image](https://user-images.githubusercontent.com/94175324/229284637-0e0a1dcd-5db6-4b91-bad7-966698e47096.png)
+4.Array value of Y
 
+![Array value of Y](https://user-images.githubusercontent.com/128135126/229293494-aa427d62-0d42-4747-9b9d-474c5f58fb29.png)
 
-3. Array value of X
+5.Values of Y prediction
 
+![Values of Y prediction](https://user-images.githubusercontent.com/128135126/229293514-ef09d849-1b86-4783-b366-9552fbafecca.png)
 
-![image](https://user-images.githubusercontent.com/94175324/229284651-e1bee598-c81e-4777-8f91-ea141e057c0a.png)
+6.Array values of Y test
 
+![Array values of Y test](https://user-images.githubusercontent.com/128135126/229293545-32b41b3c-8494-4138-8f49-6161ed6af60b.png)
 
-4. Array value of Y
+7.Training set graph
 
+![Training set graph](https://user-images.githubusercontent.com/128135126/229293565-fbd372b3-aac6-4ed6-be0b-87905f046ebb.png)
 
-![image](https://user-images.githubusercontent.com/94175324/229284659-c1e13e67-31bd-45d1-9461-7cee0c865204.png)
+8.Test set graph
 
+![Test set graph](https://user-images.githubusercontent.com/128135126/229293588-9a4d9a34-3f38-4e5f-bd77-3e3f79bb2cf0.png)
 
-5. Values of Y prediction
+9.Values of MSE,MAE and RMSE
 
-
-![image](https://user-images.githubusercontent.com/94175324/229284670-7236b3b0-8a60-4d66-a6ca-05ffaca9c1ca.png)
-
-
-6. Array values of Y test
-
-
-![image](https://user-images.githubusercontent.com/94175324/229284673-04c8fa53-a549-42d5-9a7e-38b426cab262.png)
-
-
-7. Training Set Graph
-
-
-![image](https://user-images.githubusercontent.com/94175324/229284682-91580971-3de2-40c5-8940-1b89c341ba16.png)
-
-
-
-
-8. Values of MSE, MAE and RMSE
-
-
-![image](https://user-images.githubusercontent.com/94175324/229284731-3721097e-8610-4d4b-bf82-7126caabb568.png)
-
-
-
-
+![Values of MSE,MAE and RMSE](https://user-images.githubusercontent.com/128135126/229293605-f9e791d8-b7c0-45c1-ac1b-2901364e8b26.png)
 
 ## Result:
-Thus the program to implement the simple linear regression model for predicting the marks scored is written and verified using python programming.
+Thus the program to implement the simple linear regression model for predicting the marks scored is written and verified using python programming.
